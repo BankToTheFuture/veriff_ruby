@@ -7,5 +7,9 @@ module Veriff
         "#{options[:signature] || options[:body]}#{configuration.api_secret}"
       )
     end
+
+    def validate_signature(body, signature)
+      generate_signature(body: body) == signature
+    end
   end
 end

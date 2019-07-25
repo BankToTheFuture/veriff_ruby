@@ -11,11 +11,17 @@ require 'veriff/security'
 require 'veriff/model'
 require 'veriff/media_holder'
 require 'veriff/attempt'
-require 'veriff/decision'
 require 'veriff/media'
 require 'veriff/person'
 require 'veriff/session'
 require 'veriff/timestamp'
+require 'veriff/decision'
+
+require 'veriff/webhook'
+require 'veriff/webhooks/invalid_signature_error'
+require 'veriff/webhooks/event'
+require 'veriff/webhooks/decision'
+
 
 module Veriff
   include HTTParty
