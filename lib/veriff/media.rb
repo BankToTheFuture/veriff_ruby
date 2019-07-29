@@ -1,12 +1,10 @@
 # frozen_string_literal: true
+require 'stringio'
 
 module Veriff
   class Media < Model
     def file
-      @file ||= Tempfile.open(@data_hash[:name] || 'unknown') do |f|
-        f.write Veriff.get("/media/#{id}", signature: id).body
-        f
-      end
+      StringIO.new(Veriff.get("/media/#{id}", signature: id).body)
     end
 
     def timestamp
