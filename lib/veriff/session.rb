@@ -42,5 +42,11 @@ module Veriff
                                    .parsed_response[:verification]
       )
     end
+
+    def watchlist_screening
+      @watchlist_screening ||= WatchlistScreening.new(
+        Veriff.get("/sessions/#{id}/watchlist-screening", signature: id).parsed_response[:data]
+      )
+    end
   end
 end
