@@ -7,6 +7,7 @@ module Veriff
     subject(:session) { described_class.new(params) }
 
     let(:params) { { id: 123 } }
+
     describe '#create' do
       before do
         allow(Veriff)
@@ -46,6 +47,106 @@ module Veriff
 
       it 'returns new Session object' do
         expect(described_class.create).to be_a(described_class)
+      end
+    end
+
+    describe '#watchlist_screening' do
+      let(:parsed_response) do
+        {
+          status: 'success',
+          data: {
+            attempt_id: "aea9ba6d-1b47-47fc-a4fc-f72b6d3584a7",
+            vendor_data: nil,
+            check_type: "updated_result",
+            match_status: "possible_match",
+            search_term: {
+              name: "Mirko Kokki",
+              year: "1960"
+            },
+            total_hits: 1,
+            created_at: "2021-07-05T13:23:59.851Z",
+            hits: [{
+              matched_name: "Miro kokkino",
+              countries: [
+                "Australia",
+                "Brazil"
+              ],
+              date_of_birth: "1963",
+              date_of_death: nil,
+              match_types: [
+                "aka_exact",
+                "year_of_birth"
+              ],
+              aka: [
+                "Mirkoni kokki",
+                "Mirkor Kokki"
+              ],
+              associates: [
+                "Desmon Lamela",
+                "Fred Austin"
+              ],
+              listings_related_to_match: {
+                warnings: [{
+                  source_name: "FBI Most Wanted",
+                  source_url: "http://www.fbi.gov/wanted",
+                  date: nil
+                }],
+                sanctions: [{
+                  source_name: "Argentina Ministerio de Relaciones Exteriores y Culto Sanciones de la ONU",
+                  source_url: "https://www.cancilleria.gob.ar/es/politica-exterior/seguridad-internacional/comite-de-sanciones",
+                  date: nil
+                }],
+                fitness_probity: [],
+                pep: [{
+                  source_name: "United Kingdom Insolvency Service Disqualified Directors",
+                  source_url: "https://www.insolvencydirect.bis.gov.uk/IESdatabase/viewdirectorsummary-new.asp",
+                  date: nil
+                }],
+                adverse_media: [{
+                  source_name: "SNA's Old Salt Award Passed to Adm. Davidson",
+                  source_url: "https://www.marinelink.com/amp/news/snas-old-salt-award-passed-adm-davidson-443093",
+                  date: nil
+                }]
+              }
+            }]
+          }
+        }
+      end
+
+      before do
+        allow(Veriff)
+          .to receive(:get)
+          .with("/sessions/123/watchlist-screening", signature: 123)
+          .and_return(response_mock)
+      end
+
+      let(:response_mock) do
+        instance_double(HTTParty::Response, parsed_response: parsed_response)
+      end
+
+      it "calls get watchlist_screening" do
+        session.watchlist_screening
+
+        expect(Veriff)
+          .to have_received(:get)
+          .with("/sessions/123/watchlist-screening", signature: 123)
+          .once
+      end
+
+      it 'creates new WatchlistScreening object with returned watchlist screening details' do
+        allow(WatchlistScreening).to receive(:new)
+
+        session.watchlist_screening
+
+        expect(WatchlistScreening).to have_received(:new).with(parsed_response[:data]).once
+      end
+
+      it 'returns new WatchlistScreening object' do
+        expect(session.watchlist_screening).to be_a(WatchlistScreening)
+      end
+
+      it 'does not create new object in consecutive call' do
+        expect(session.watchlist_screening).to be_equal(session.watchlist_screening)
       end
     end
 
