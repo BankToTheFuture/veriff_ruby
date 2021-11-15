@@ -15,7 +15,7 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2019.1009)
     multi_xml (0.6.0)
-    rake (10.5.0)
+    rake (13.0.6)
     rspec (3.8.0)
       rspec-core (~> 3.8.0)
       rspec-expectations (~> 3.8.0)
@@ -36,7 +36,7 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 2.0)
-  rake (~> 10.0)
+  rake (~> 13.0)
   rspec (~> 3.0)
   timecop (~> 0.9)
   veriff!
