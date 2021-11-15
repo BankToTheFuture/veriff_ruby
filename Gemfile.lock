@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    veriff (0.1.0)
+    veriff (0.2.0)
       httparty (~> 0.17, >= 0.17.3)
 
 GEM
