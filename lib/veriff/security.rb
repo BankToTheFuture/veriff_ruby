@@ -3,9 +3,8 @@
 module Veriff
   module Security
     def generate_signature(options)
-      Digest::SHA256.hexdigest(
-        "#{options[:signature] || options[:body]}#{configuration.api_secret}"
-      )
+      digest = OpenSSL::Digest.new('sha256')
+      OpenSSL::HMAC.hexdigest(digest, configuration.api_secret, options[:body])
     end
 
     def validate_signature(body, signature)
