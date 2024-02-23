@@ -35,6 +35,7 @@ module Veriff
 
   headers(
     'CONTENT-TYPE' => 'application/json',
-    'X-AUTH-CLIENT' => -> { configuration.api_key }
+    'X-AUTH-CLIENT' => -> { configuration.api_key },
+    'X-HMAC-SIGNATURE' => ->(options) { generate_signature(options) }
   )
 end
