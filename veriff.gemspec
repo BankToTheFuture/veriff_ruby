@@ -7,16 +7,16 @@ require 'veriff/version'
 Gem::Specification.new do |spec|
   spec.name          = 'veriff'
   spec.version       = Veriff::VERSION
-  spec.authors       = ['Wojtek Widenka']
-  spec.email         = ['wojtek@codegarden.online']
+  spec.authors       = ['Wojtek Widenka', 'Sergei Tsõganov']
+  spec.email         = ['wojtek@codegarden.online', 'sergei.tsoganov@internet.ee']
 
   spec.summary       = 'Simple wrapper on Verff.com API'
   spec.description   = 'Simple wrapper on Verff.com API'
-  spec.homepage      = 'https://github.com/BankToTheFuture/veriff_ruby'
+  spec.homepage      = 'https://github.com/maricavor/veriff_ruby'
   spec.license       = 'MIT'
 
   spec.metadata['homepage_uri'] = spec.homepage
-  spec.metadata['source_code_uri'] = 'https://github.com/BankToTheFuture/veriff_ruby'
+  spec.metadata['source_code_uri'] = 'https://github.com/maricavor/veriff_ruby'
 
   spec.files = Dir.chdir(File.expand_path(__dir__)) do
     `git ls-files -z`
