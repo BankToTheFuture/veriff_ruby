@@ -2,8 +2,10 @@
 
 module Veriff
   class Model
+    attr_reader :data_hash
+
     def initialize(data_hash)
-      data_hash.fetch(:id)
+      data_hash.fetch(:id) { data_hash.fetch(:session_id) }
       @data_hash = data_hash
     end
 
