@@ -23,6 +23,7 @@ require 'veriff/webhook'
 require 'veriff/webhooks/invalid_signature_error'
 require 'veriff/webhooks/event'
 require 'veriff/webhooks/decision'
+require 'veriff/webhooks/fullauto'
 require 'veriff/webhooks/watchlist_screening'
 
 module Veriff
@@ -37,6 +38,6 @@ module Veriff
   headers(
     'CONTENT-TYPE' => 'application/json',
     'X-AUTH-CLIENT' => -> { configuration.api_key },
-    'X-SIGNATURE' => ->(options) { generate_signature(options) }
+    'X-HMAC-SIGNATURE' => ->(options) { generate_signature(options) }
   )
 end
