@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 require 'httparty'
-require 'veriff/parser'
+require 'json'
 
+require 'veriff/parser'
 require 'veriff/version'
 
 require 'veriff/configuration'
