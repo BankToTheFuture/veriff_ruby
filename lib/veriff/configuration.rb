@@ -6,8 +6,10 @@ module Veriff
       base_uri: 'https://api.veriff.me/v1'
     }.freeze
 
+    Config = Struct.new(:api_key, :api_secret, :base_uri, keyword_init: true)
+
     def configuration
-      @configuration ||= OpenStruct.new(DEFAULT_CONFIG)
+      @configuration ||= Config.new(**DEFAULT_CONFIG)
     end
 
     def configure
